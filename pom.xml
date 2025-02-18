@@ -17,6 +17,14 @@
         <com.google.protobuf.version>3.25.5</com.google.protobuf.version>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/yaree-project/common-rpc</url>
+        </repository>
+    </distributionManagement>
+
     <dependencyManagement>
         <dependencies>
             <!-- https://mvnrepository.com/artifact/io.grpc/grpc-bom -->
