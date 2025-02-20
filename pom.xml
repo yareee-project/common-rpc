@@ -5,11 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.yaree</groupId>
     <artifactId>common-rpc</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
         <java.version>21</java.version>
+        <scm.branch>main</scm.branch>
         <io.grpc.version>1.70.0</io.grpc.version>
         <org.apache.tomcat.version>6.0.53</org.apache.tomcat.version>
         <kr.motd.maven.version>1.7.1</kr.motd.maven.version>
@@ -17,10 +18,16 @@
         <com.google.protobuf.version>3.25.5</com.google.protobuf.version>
     </properties>
 
+    <scm>
+        <url>https://github.com/yareee-project/common-rpc/tree/${scm.branch}</url>
+        <connection>scm:git:git://github.com/yareee-project/common-rpc.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/yareee-project/common-rpc.git</developerConnection>
+    </scm>
+
     <distributionManagement>
         <repository>
             <id>github</id>
-            <name>GitHub OWNER Apache Maven Packages</name>
+            <name>common-rpc</name>
             <url>https://maven.pkg.github.com/yaree-project/common-rpc</url>
         </repository>
     </distributionManagement>
