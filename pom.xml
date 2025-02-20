@@ -1,9 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.yaree</groupId>
     <artifactId>common-rpc</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -16,12 +17,12 @@
         <com.google.protobuf.version>3.25.5</com.google.protobuf.version>
     </properties>
 
-<!--    <scm>-->
-<!--        <url>https://github.com/yareee-project/common-rpc/tree/${scm.branch}</url>-->
-<!--        <connection>scm:git:git://github.com/yareee-project/common-rpc.git</connection>-->
-<!--        <developerConnection>scm:git:ssh://git@github.com/yareee-project/common-rpc.git</developerConnection>-->
-<!--      <tag>HEAD</tag>-->
-<!--  </scm>-->
+    <scm>
+        <url>https://github.com/yareee-project/common-rpc/tree/${scm.branch}</url>
+        <connection>scm:git:git://github.com/yareee-project/common-rpc.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/yareee-project/common-rpc.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
 
     <distributionManagement>
         <repository>
@@ -91,9 +92,12 @@
                 <artifactId>protobuf-maven-plugin</artifactId>
                 <version>${org.xolstice.maven.plugins.version}</version>
                 <configuration>
-                    <protocArtifact>com.google.protobuf:protoc:${com.google.protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
+                    <protocArtifact>
+                        com.google.protobuf:protoc:${com.google.protobuf.version}:exe:${os.detected.classifier}
+                    </protocArtifact>
                     <pluginId>grpc-java</pluginId>
-                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${io.grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
+                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${io.grpc.version}:exe:${os.detected.classifier}
+                    </pluginArtifact>
                 </configuration>
                 <executions>
                     <execution>
