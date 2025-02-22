@@ -1,0 +1,44 @@
+repositories {
+  mavenCentral()
+}
+
+def grpcVersion = '1.70.0'
+def protobufVersion = '3.25.5'
+
+dependencies {
+  implementation(
+      platform("io.grpc:grpc-bom:${grpcVersion}"),
+      platform("com.google.protobuf:protobuf-bom:${protobufVersion}")
+  )
+
+  implementation(
+      "io.grpc:grpc-protobuf",
+      "io.grpc:grpc-services",
+      "io.grpc:grpc-stub",
+      "com.google.protobuf:protobuf-java-util"
+  )
+
+  runtimeOnly "io.grpc:grpc-netty-shaded"
+  compileOnly "org.apache.tomcat:annotations-api:6.0.53"
+}
+
+protobuf {
+  protoc {
+    artifact = "com.google.protobuf:protoc:${protobufVersion}"
+  }
+  plugins {
+    grpc {
+      artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+    }
+  }
+  generateProtoTasks {
+    all().each { task ->
+      task.builtins {
+        java {}
+      }
+      task.plugins {
+        grpc {}
+      }
+    }
+  }
+}

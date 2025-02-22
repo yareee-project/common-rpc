@@ -1,0 +1,69 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+allprojects {
+    group = 'com.yaree'
+    version = '0.0.1-SNAPSHOT'
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven-publish'
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+}
+
+tasks.register('bumpVersion') {
+    doLast {
+        def propertyFile = file("${rootProject.projectDir}/gradle.properties")
+        def properties = new Properties()
+        properties.load(propertyFile.newReader())
+
+        def module = project.findProperty("module") + ".version"
+        def releaseType = project.findProperty("releaseType").toString()
+
+        def currentVersion = properties[module]
+        def versionParts = currentVersion.split('\\.')
+
+        def major = versionParts[0] as int
+        def minor = versionParts[1] as int
+        def patch = versionParts[2] as int
+
+        switch (releaseType) {
+            case "major":
+                major++
+                minor = 0
+                patch = 0
+                break
+            case "minor":
+                minor++
+                patch = 0
+                break
+            case "patch":
+                patch++
+                break
+            default:
+                break
+        }
+
+        def newVersion = "${major}.${minor}.${patch}".toString()  // Ensure it's a String
+        properties[module] = newVersion
+
+        println "🔹 Bumping version of ${module} to ${newVersion}"
+
+        // ✅ FIX: Rewrite `gradle.properties` correctly
+        propertyFile.withWriter("UTF-8") { writer ->
+            properties.store(writer, null)
+        }
+
+        println "✅ Version updated in ${propertyFile.absolutePath}"
+    }
+}
