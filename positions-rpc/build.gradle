@@ -1,0 +1,33 @@
+plugins {
+  id 'java'
+  id 'maven-publish'
+  id 'com.google.protobuf' version '0.9.2'
+}
+
+apply from: '../grpc-module.gradle'
+
+def projectVersion = project.findProperty("positions.version")
+group = 'com.yaree'
+version = projectVersion
+
+publishing {
+
+  publications {
+    mavenJava(MavenPublication) {
+      from components.java
+      artifactId = "positions-rpc"
+      groupId = "com.yaree"
+      version = projectVersion
+    }
+  }
+
+  repositories {
+    maven {
+      url = uri("https://maven.pkg.github.com/yareee-project/common-rpc")
+      credentials {
+        username = project.findProperty("gpr.user")
+        password = project.findProperty("gpr.token")
+      }
+    }
+  }
+}

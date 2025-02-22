@@ -9,13 +9,21 @@ public class PositionClient {
 
   private final PositionServiceGrpc.PositionServiceBlockingStub stub;
 
-  public PositionClient() {
+  private PositionClient(String host, String port) {
     var managedChanel = ManagedChannelBuilder
         .forAddress(
-            System.getProperty("position.client.host", "localhost"),
-            Integer.parseInt(System.getProperty("position.client.port", "50051"))
+            System.getProperty("position.client.host", host),
+            Integer.parseInt(System.getProperty("position.client.port", port))
         ).usePlaintext().build();
     this.stub = PositionServiceGrpc.newBlockingStub(managedChanel);
+  }
+
+  public static PositionClient getPositionsClient(String host, Integer port) {
+    return new PositionClient(host, port.toString());
+  }
+
+  public static PositionClient getPositionsClient() {
+    return new PositionClient("localhost", "50051");
   }
 
   public Position.PositionResponse getPosition(Position.GetPositionRequest request) {
