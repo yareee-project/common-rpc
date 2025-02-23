@@ -35,7 +35,7 @@ jobs:
 
     steps:
       - name: build
-        uses: yareee-project/common-rpc/build-action@main
+        uses: yareee-project/common-rpc/build_action@main
         with:
           module: ${{ env.MODULE }}
 
@@ -52,7 +52,7 @@ jobs:
 
     steps:
       - name: build
-        uses: yareee-project/common-rpc/build-action@main
+        uses: yareee-project/common-rpc/build_action@main
         with:
           module: ${{ env.MODULE }}
 
