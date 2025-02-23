@@ -13,12 +13,10 @@ runs:
   steps:
     - name: Set executable permissions
       shell: bash
-      run: |
-        ls -a
-        chmod +x ./entrypoint.sh
+      run: chmod +x .github/actions/publish/entrypoint.sh
 
     - name: Run Publish Script
-      run: ./entrypoint.sh
+      run: .github/actions/publish/entrypoint.sh
       shell: bash
       env:
         MODULE_NAME: ${{ inputs.module }}

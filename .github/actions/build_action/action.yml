@@ -17,12 +17,10 @@ runs:
 
     - name: Set executable permissions
       shell: bash
-      run: |
-        ls -a
-        chmod +x ./entrypoint.sh
+      run: chmod +x .github/actions/build_action/entrypoint.sh
 
     - name: Run Build Script
-      run: ./entrypoint.sh
+      run: .github/actions/build_action/entrypoint.sh
       shell: bash
       env:
         REPO_NAME: ${{ inputs.repo }}

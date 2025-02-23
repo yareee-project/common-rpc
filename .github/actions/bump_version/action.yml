@@ -18,10 +18,10 @@ runs:
   steps:
     - name: Set executable permissions
       shell: bash
-      run: chmod +x ./entrypoint.sh
+      run: chmod +x .github/actions/bump_version/entrypoint.sh
 
     - name: Bump version
-      run: ./entrypoint.sh
+      run: .github/actions/bump_version/entrypoint.sh
       shell: bash
       env:
         MODULE_NAME: ${{ inputs.module }}
