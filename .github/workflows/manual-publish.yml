@@ -1,0 +1,62 @@
+name: Manual publish workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      module:
+        description: 'The module to release'
+        required: true
+        default: 'common-rpc-bom'
+        options:
+          - common-rpc-bom
+          - positions-rpc
+
+      release_type:
+        description: 'The type of release (major, minor, patch)'
+        required: true
+        default: 'patch'
+        options:
+          - patch
+          - minor
+          - major
+
+env:
+  MODULE: ${{ github.event.inputs.module }}  # Get module from input
+  RELEASE_TYPE: ${{ github.event.inputs.release_type }}  # Get release type from input
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: bump-version-${{ github.ref }}
+      cancel-in-progress: false
+
+    steps:
+      - name: build
+        uses: yareee-project/build-action@main
+        with:
+          module: ${{ env.MODULE }}
+
+      - name: bump version
+        uses: yaree-project/bump_version@main
+        with:
+          module: ${{ env.MODULE }}
+          release-type: "patch"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: bump-version
+
+    steps:
+      - name: build
+        uses: yareee-project/build-action@main
+        with:
+          module: ${{ env.MODULE }}
+
+      - name: publish
+        uses: yaree-project/publish@main
+        with:
+          module: ${{ env.MODULE }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          

@@ -1,0 +1,25 @@
+name: 'Run build'
+description: 'Compile project'
+
+inputs:
+  module:
+    description: 'Module to build'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'corretto'
+        java-version: '21'
+
+    - name: Run Build Script
+      run: ./entrypoint.sh
+      shell: bash
+      env:
+        REPO_NAME: ${{ inputs.repo }}

@@ -7,13 +7,13 @@ repositories {
   mavenCentral()
 }
 
-def projectVersion = project.findProperty("bom.version")
+def projectVersion = project.findProperty("common-rpc-bom.version")
 group = 'com.yaree'
 version = projectVersion
 
 dependencies {
   constraints {
-    api "com.yaree:positions-rpc:${project.findProperty("positions.version")}"
+    api "com.yaree:positions-rpc:${project.findProperty("positions-rpc.version")}"
   }
 }
 

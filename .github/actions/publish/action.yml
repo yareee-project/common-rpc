@@ -1,0 +1,19 @@
+name: "Publish Module"
+description: "Publishes a specific module to GitHub Packages"
+inputs:
+  module:
+    description: "The module to publish"
+    required: true
+  github-token:
+    description: "GitHub Token to authenticate"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run Publish Script
+      run: ./entrypoint.sh
+      shell: bash
+      env:
+        MODULE_NAME: ${{ inputs.module }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}

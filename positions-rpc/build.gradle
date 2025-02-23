@@ -6,7 +6,7 @@ plugins {
 
 apply from: '../grpc-module.gradle'
 
-def projectVersion = project.findProperty("positions.version")
+def projectVersion = project.findProperty("positions-rpc.version")
 group = 'com.yaree'
 version = projectVersion
 

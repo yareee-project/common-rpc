@@ -1,0 +1,25 @@
+name: 'Bump version'
+description: 'Bump version'
+
+inputs:
+  module:
+    description: 'module to bump version'
+    required: true
+  release-type:
+    description: 'minor|major|patch'
+    required: false
+    default: 'patch'
+  github-token:
+    description: 'gh PAT'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Bump version
+      run: ./entrypoint.sh
+      shell: bash
+      env:
+        MODULE_NAME: ${{ inputs.module }}
+        RELEASE_TYPE: ${{ inputs.release-type }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
