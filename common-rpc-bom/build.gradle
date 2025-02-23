@@ -1,0 +1,39 @@
+plugins {
+  id 'java-platform'
+  id 'maven-publish'
+}
+
+repositories {
+  mavenCentral()
+}
+
+def projectVersion = project.findProperty("bom.version")
+group = 'com.yaree'
+version = projectVersion
+
+dependencies {
+  constraints {
+    api "com.yaree:positions-rpc:${project.findProperty("positions.version")}"
+  }
+}
+
+publishing {
+  publications {
+    bom(MavenPublication) {
+      from components.javaPlatform
+      groupId = 'com.yaree'
+      artifactId = 'common-rpc-bom'
+      version = projectVersion
+    }
+  }
+
+  repositories {
+    maven {
+      url = uri("https://maven.pkg.github.com/yareee-project/common-rpc")
+      credentials {
+        username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+        password = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
+      }
+    }
+  }
+}
