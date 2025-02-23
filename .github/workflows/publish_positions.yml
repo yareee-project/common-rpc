@@ -26,7 +26,7 @@ jobs:
         with:
           module: ${{ env.MODULE }}
           release-type: "patch"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GIT_TOKEN }}
 
   publish:
     runs-on: ubuntu-latest
@@ -42,4 +42,4 @@ jobs:
         uses: yaree-project/common-rpc/publish@main
         with:
           module: ${{ env.MODULE }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GIT_TOKEN }}
