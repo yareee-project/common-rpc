@@ -34,6 +34,9 @@ jobs:
       cancel-in-progress: false
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
       - name: build
         uses: ./.github/actions/build_action
         with:
