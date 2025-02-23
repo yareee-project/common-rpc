@@ -38,7 +38,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: build
-        uses: yareee-project/common-rpc/build_action@main
+        uses: yareee-project/common-rpc/.github/actions/build_action@main
         with:
           module: ${{ env.MODULE }}
 
