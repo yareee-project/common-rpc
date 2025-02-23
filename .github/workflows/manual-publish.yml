@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       module:
+        type: choice
         description: 'The module to release'
         required: true
         default: 'common-rpc-bom'
@@ -12,6 +13,7 @@ on:
           - positions-rpc
 
       release_type:
+        type: choice
         description: 'The type of release (major, minor, patch)'
         required: true
         default: 'patch'
