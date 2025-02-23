@@ -13,7 +13,9 @@ runs:
   steps:
     - name: Set executable permissions
       shell: bash
-      run: chmod +x ./entrypoint.sh
+      run: |
+        ls -a
+        chmod +x ./entrypoint.sh
 
     - name: Run Publish Script
       run: ./entrypoint.sh
