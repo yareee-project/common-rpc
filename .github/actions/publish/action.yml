@@ -11,6 +11,10 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Set executable permissions
+      shell: bash
+      run: chmod +x ./entrypoint.sh
+
     - name: Run Publish Script
       run: ./entrypoint.sh
       shell: bash

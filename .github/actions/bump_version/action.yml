@@ -16,6 +16,10 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Set executable permissions
+      shell: bash
+      run: chmod +x ./entrypoint.sh
+
     - name: Bump version
       run: ./entrypoint.sh
       shell: bash
