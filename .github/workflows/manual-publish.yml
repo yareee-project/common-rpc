@@ -35,12 +35,12 @@ jobs:
 
     steps:
       - name: build
-        uses: yaree-project/common-rpc/build-action@main
+        uses: yareee-project/common-rpc/build-action@main
         with:
           module: ${{ env.MODULE }}
 
       - name: bump version
-        uses: yaree-project/common-rpc/bump_version@main
+        uses: yareee-project/common-rpc/bump_version@main
         with:
           module: ${{ env.MODULE }}
           release-type: "patch"
@@ -52,12 +52,12 @@ jobs:
 
     steps:
       - name: build
-        uses: yaree-project/common-rpc/build-action@main
+        uses: yareee-project/common-rpc/build-action@main
         with:
           module: ${{ env.MODULE }}
 
       - name: publish
-        uses: yaree-project/common-rpc/publish@main
+        uses: yareee-project/common-rpc/publish@main
         with:
           module: ${{ env.MODULE }}
           github-token: ${{ secrets.GIT_TOKEN }}
