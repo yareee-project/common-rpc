@@ -15,12 +15,6 @@ runs:
         distribution: 'corretto'
         java-version: '21'
 
-    - name: Set executable permissions
-      shell: bash
-      run: chmod +x .github/actions/build_action/entrypoint.sh
-
     - name: Run Build Script
-      run: .github/actions/build_action/entrypoint.sh
       shell: bash
-      env:
-        REPO_NAME: ${{ inputs.repo }}
+      run: ./gradlew :${inputs.module}:build

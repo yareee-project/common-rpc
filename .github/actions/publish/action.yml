@@ -4,20 +4,16 @@ inputs:
   module:
     description: "The module to publish"
     required: true
-  github-token:
+  git-token:
     description: "GitHub Token to authenticate"
     required: true
 
 runs:
   using: "composite"
   steps:
-    - name: Set executable permissions
+    - name: Publish module
       shell: bash
-      run: chmod +x .github/actions/publish/entrypoint.sh
-
-    - name: Run Publish Script
-      run: .github/actions/publish/entrypoint.sh
-      shell: bash
+      run: ./gradlew :${{ inputs.module }}:publish
       env:
-        MODULE_NAME: ${{ inputs.module }}
-        GITHUB_TOKEN: ${{ inputs.github-token }}
+        GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
+        GITHUB_TOKEN: ${{ inputs.git-token }}

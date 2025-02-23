@@ -38,16 +38,15 @@ jobs:
         uses: actions/checkout@v3
 
       - name: build
-        uses: ./.github/actions/build_action
+        uses: yareee-project/common-rpc/build_action@main
         with:
           module: ${{ env.MODULE }}
 
       - name: bump version
-        uses: ./.github/actions/bump_version
+        uses: yareee-project/common-rpc/bump_version@main
         with:
           module: ${{ env.MODULE }}
           release-type: "patch"
-          github-token: ${{ secrets.GIT_TOKEN }}
 
   publish:
     runs-on: ubuntu-latest
@@ -55,13 +54,13 @@ jobs:
 
     steps:
       - name: build
-        uses: ./.github/actions/build_action
+        uses: yareee-project/common-rpc/build_action@main
         with:
           module: ${{ env.MODULE }}
 
       - name: publish
-        uses: ./.github/actions/publish
+        uses: yareee-project/common-rpc/publish_action@main
         with:
           module: ${{ env.MODULE }}
-          github-token: ${{ secrets.GIT_TOKEN }}
+          git-token: ${{ secrets.GIT_TOKEN }}
           

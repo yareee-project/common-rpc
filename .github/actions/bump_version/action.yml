@@ -9,21 +9,23 @@ inputs:
     description: 'minor|major|patch'
     required: false
     default: 'patch'
-  github-token:
-    description: 'gh PAT'
-    required: true
 
 runs:
   using: composite
   steps:
-    - name: Set executable permissions
+    - name: Run Version Bump
       shell: bash
-      run: chmod +x .github/actions/bump_version/entrypoint.sh
+      run: ./gradlew bumpVersion -Pmodule=${{ inputs.module }} -PreleaseType=${{ inputs.release-type }}
 
-    - name: Bump version
-      run: .github/actions/bump_version/entrypoint.sh
+    - name: Commit and Push Version Bump
       shell: bash
-      env:
-        MODULE_NAME: ${{ inputs.module }}
-        RELEASE_TYPE: ${{ inputs.release-type }}
-        GITHUB_TOKEN: ${{ inputs.github-token }}
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add gradle.properties
+        git commit -am "🔖 Bump version for ${{ inputs.module }}"
+        git push
+
+    - name: log status
+      shell: bash
+      run: echo "✅ Version bumped successfully"
